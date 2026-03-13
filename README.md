@@ -1,16 +1,39 @@
-## Hi there 👋
+# Hi 👋 I'm Supriyo Sarkar
 
-<!--
-**SupriyoDz/SupriyoDz** is a ✨ _special_ ✨ repository because its `README.md` (this file) appears on your GitHub profile.
+💻 Software Developer | Backend & Cloud  
+🔐 Authentication & Identity Specialist  
+☁️ Azure | Microservices | Java | Node.js  
 
-Here are some ideas to get you started:
+## 🚀 Skills
+- Java / Spring Boot
+- Node.js / Next.js
+- Azure AD B2C / Microsoft Entra ID
+- Microservices Architecture
+- REST APIs
+- Supabase / PostgreSQL
 
-- 🔭 I’m currently working on ...
-- 🌱 I’m currently learning ...
-- 👯 I’m looking to collaborate on ...
-- 🤔 I’m looking for help with ...
-- 💬 Ask me about ...
-- 📫 How to reach me: ...
-- 😄 Pronouns: ...
-- ⚡ Fun fact: ...
--->
+## 📌 Projects
+- 🔐 Azure AD B2C Custom Policy (Password Expiry System)
+- 🛒 E-commerce Backend (Cart, Wishlist, Products)
+- 🏢 Society Management System (Mobile App Backend)
+
+## 🚀 Tech Stack
+
+<p>
+<img src="https://skillicons.dev/icons?i=java,nodejs,nextjs,react,postgres,azure,docker,git,github,linux,supabase" />
+</p>
+
+### Backend
+- Java
+- Node.js
+- REST APIs
+- Microservices
+
+### Cloud & Identity
+- Microsoft Entra ID
+- Azure AD B2C
+- Authentication & Authorization
+
+### Database
+- PostgreSQL
+- Supabase
