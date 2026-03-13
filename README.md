@@ -13,7 +13,6 @@
 - Supabase / PostgreSQL
 
 ## 📌 Projects
-- 🔐 Azure AD B2C Custom Policy (Password Expiry System)
 - 🛒 E-commerce Backend (Cart, Wishlist, Products)
 - 🏢 Society Management System (Mobile App Backend)
 
