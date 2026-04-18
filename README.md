@@ -14,25 +14,36 @@
 
 ## 📌 Projects
 - 🛒 E-commerce Backend (Cart, Wishlist, Products)
-- 🏢 Society Management System (Mobile App Backend)
 
 ## 🚀 Tech Stack
 
 <p>
-<img src="https://skillicons.dev/icons?i=java,nodejs,nextjs,react,postgres,azure,docker,git,github,linux,supabase" />
+<img src="https://skillicons.dev/icons?i=java,nodejs,nextjs,react,postgres,azure,docker,git,github,linux,supabase,typescript,python,xml" />
 </p>
 
-### Backend
-- Java
+### Backend Framework
+- Springboot
+- Express.js
 - Node.js
-- REST APIs
-- Microservices
+  
+### Language
+- JAVA
+- PYTHON
+  
+### Script Language
+- TypeScript
+- XML
+- HTML
+- Javascript
 
 ### Cloud & Identity
 - Microsoft Entra ID
 - Azure AD B2C
 - Authentication & Authorization
+- APIM
+- AZURE FRONT DOOR
 
 ### Database
 - PostgreSQL
 - Supabase
+- MONGODB
