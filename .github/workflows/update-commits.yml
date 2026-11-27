@@ -1,0 +1,93 @@
+name: Update All-Branch Commit Count
+
+on:
+  schedule:
+    - cron: "0 */6 * * *"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  update-commits:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout profile repo
+        uses: actions/checkout@v4
+
+      - name: Count unique commits across all branches
+        env:
+          GH_TOKEN: ${{ secrets.GH_PAT || github.token }}
+          USERNAME: SupriyoDz
+        run: |
+          python3 - << 'EOF'
+          import json, os, re, urllib.request, urllib.parse
+
+          token = os.environ["GH_TOKEN"]
+          username = os.environ["USERNAME"]
+          headers = {
+              "Authorization": f"Bearer {token}",
+              "Accept": "application/vnd.github+json",
+              "User-Agent": "commit-counter-action"
+          }
+
+          def get_all_pages(url):
+              results = []
+              page = 1
+              while True:
+                  sep = "&" if "?" in url else "?"
+                  req = urllib.request.Request(f"{url}{sep}per_page=100&page={page}", headers=headers)
+                  try:
+                      with urllib.request.urlopen(req) as resp:
+                          data = json.loads(resp.read().decode())
+                  except Exception:
+                      break
+                  if not data:
+                      break
+                  results.extend(data)
+                  if len(data) < 100:
+                      break
+                  page += 1
+              return results
+
+          repos = get_all_pages("https://api.github.com/user/repos?affiliation=owner")
+          if not repos:
+              repos = get_all_pages(f"https://api.github.com/users/{username}/repos?type=owner")
+
+          seen_shas = set()
+          for repo in repos:
+              full_name = repo["full_name"]
+              branches = get_all_pages(f"https://api.github.com/repos/{full_name}/branches")
+              for br in branches:
+                  branch_name = urllib.parse.quote(br["name"], safe="")
+                  commits = get_all_pages(
+                      f"https://api.github.com/repos/{full_name}/commits?sha={branch_name}"
+                  )
+                  for c in commits:
+                      seen_shas.add(c["sha"])
+
+          total = len(seen_shas)
+          badge = f"![All-Branch Commits](https://img.shields.io/badge/Total%20Commits%20(All%20Branches)-{total}-7aa2f7?style=for-the-badge&logo=git&logoColor=white)"
+
+          with open("README.md", "r", encoding="utf-8") as f:
+              content = f.read()
+
+          updated = re.sub(
+              r"<!-- COMMITS_START -->.*?<!-- COMMITS_END -->",
+              f"<!-- COMMITS_START -->\n{badge}\n<!-- COMMITS_END -->",
+              content,
+              flags=re.DOTALL,
+          )
+
+          with open("README.md", "w", encoding="utf-8") as f:
+              f.write(updated)
+
+          print(f"Updated total unique commits across all branches: {total}")
+          EOF
+
+      - name: Commit and push if changed
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add README.md
+          git diff --staged --quiet || (git commit -m "chore: update all-branch commit count" && git push)
