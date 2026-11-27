@@ -50,18 +50,22 @@ jobs:
                   page += 1
               return results
 
-          repos = get_all_pages("https://api.github.com/user/repos?affiliation=owner")
+                  repos = get_all_pages(
+              "https://api.github.com/user/repos?affiliation=owner,collaborator,organization_member"
+          )
           if not repos:
-              repos = get_all_pages(f"https://api.github.com/users/{username}/repos?type=owner")
+              repos = get_all_pages(f"https://api.github.com/users/{username}/repos?type=all")
 
           seen_shas = set()
           for repo in repos:
               full_name = repo["full_name"]
+              is_owner = repo["owner"]["login"].lower() == username.lower()
               branches = get_all_pages(f"https://api.github.com/repos/{full_name}/branches")
               for br in branches:
                   branch_name = urllib.parse.quote(br["name"], safe="")
+                  author_filter = "" if is_owner else f"&author={username}"
                   commits = get_all_pages(
-                      f"https://api.github.com/repos/{full_name}/commits?sha={branch_name}"
+                      f"https://api.github.com/repos/{full_name}/commits?sha={branch_name}{author_filter}"
                   )
                   for c in commits:
                       seen_shas.add(c["sha"])
