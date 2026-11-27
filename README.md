@@ -123,6 +123,7 @@
 <br />
 
 <img src="https://github-readme-activity-graph.vercel.app/graph?username=SupriyoDz&theme=tokyo-night&hide_border=true" width="95%" alt="Contribution Activity Graph" />
+<img src="https://ghchart.rshah.org/7aa2f7/SupriyoDz" alt="SupriyoDz Contribution Calendar" width="95%" />
 
 </div>
 
