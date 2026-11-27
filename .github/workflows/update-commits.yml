@@ -50,7 +50,7 @@ jobs:
                   page += 1
               return results
 
-                  repos = get_all_pages(
+          repos = get_all_pages(
               "https://api.github.com/user/repos?affiliation=owner,collaborator,organization_member"
           )
           if not repos:
